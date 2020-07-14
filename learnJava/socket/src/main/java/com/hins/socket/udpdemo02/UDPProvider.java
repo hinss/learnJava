@@ -17,10 +17,8 @@ public class UDPProvider {
         provider.start();
 
         // 模拟发送停止信号
-        int signal = System.in.read();
-        if(signal != -1){
-            provider.exit();
-        }
+        System.in.read();
+        provider.exit();
     }
 
     private static class Provider extends Thread{
@@ -51,7 +49,6 @@ public class UDPProvider {
 
                     // 接收
                     datagramSocket.receive(receivePacket);
-                    System.out.println("DEBUG");
 
                     // 打印接收到的信息与发送者的信息
                     // 发送者的IP地址
