@@ -1,4 +1,4 @@
-package com.hins.socket.socketdemo01;
+package com.hins.socket.sockettcpdemo01;
 
 import java.io.*;
 import java.net.ServerSocket;
