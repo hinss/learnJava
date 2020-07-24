@@ -1,8 +1,10 @@
 package com.hins.socket.tcpudpdemo.server;
 
+import com.hins.socket.tcpudpdemo.constants.UDPConstants;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.util.UUID;
 
 public class ServerProviderTest {
 
@@ -44,5 +46,36 @@ public class ServerProviderTest {
         for(int i = 0; i < position; i++){
             System.out.println(clientByteBuffer.get(i));
         }
+    }
+
+    @Test
+    public void testByteBuffer2(){
+
+        final byte[] buffer = new byte[128];
+
+        ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+
+        byte[] header = UDPConstants.HEADER;
+        short command = 2;
+        int port = 21812;
+        String sn = UUID.randomUUID().toString();
+
+        System.out.println("===模拟服务端写入数据到bytebuffer中===");
+
+        byteBuffer.put(header);
+        byteBuffer.putShort(command);
+        byteBuffer.putInt(port);
+        byteBuffer.put(sn.getBytes());
+
+        int position = byteBuffer.position();
+        System.out.println("postion: "+position);
+
+        System.out.println("===模拟客户端从bytebuffer中读取数据===");
+
+        ByteBuffer clientByteBuffer = ByteBuffer.wrap(buffer);
+
+        byte b = clientByteBuffer.get(UDPConstants.HEADER.length);
+
+
     }
 }
