@@ -6,15 +6,30 @@ import com.hins.socket.tcpudpdemo.utils.ByteUtils;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
+import java.util.UUID;
 
 public class ServerProvider {
 
+   private static Provider INSTANCE;
 
+   public static void start(int tcpPort){
+        stop();
 
+        String sn = UUID.randomUUID().toString();
+        Provider provider = new Provider(sn.getBytes(),tcpPort);
+        provider.start();
 
+        // 静态内部类的方式完成单例
+        INSTANCE = provider;
+   }
+
+   public static void stop(){
+       if(INSTANCE != null){
+           INSTANCE.exit();
+           INSTANCE = null;
+       }
+   }
 
 
     /**
@@ -99,24 +114,39 @@ public class ServerProvider {
 
                         ds.send(responsePackage);
                         System.out.println("ServerProvider response to:" + clientIp + "\tport:" + responsePort + "\tdataLen:" + len);
-
+                    }else{
+                        System.out.println("ServerProvider receive cmd not support; cmd:" + cmd + "\tport:" + port);
                     }
-
-
-
                 }
 
-
-
-
-
+                System.out.println("ServerProvider has already closed!");
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                close();
             }
-
-
         }
+
+        /**
+         * 关闭datagramsocket流的方法
+         */
+        private void close(){
+            if(ds != null){
+                ds.close();
+                ds = null;
+            }
+        }
+
+        /**
+         * 退出方法
+         * 停止接收数据并且关闭流
+         */
+        void exit(){
+            flag = true;
+            close();
+        }
+
+
     }
 
 }
