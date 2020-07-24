@@ -6,7 +6,7 @@ public class Client {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ServerInfo serverInfo = ClientSearcher.searchServer(1000);
+        ServerInfo serverInfo = ClientSearcher.searchServer(10000);
 
         System.out.println("Server:" + serverInfo);
     }

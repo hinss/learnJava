@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ClientSearcher {
 
-    private static final int LISTEN_PORT = UDPConstants.PORT_SERVER;
+    private static final int LISTEN_PORT = UDPConstants.PORT_CLIENT_RESPONSE;
 
 
     public static ServerInfo searchServer(long timeOut) throws InterruptedException {
