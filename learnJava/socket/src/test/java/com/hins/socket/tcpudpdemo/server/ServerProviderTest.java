@@ -1,7 +1,7 @@
 package com.hins.socket.tcpudpdemo.server;
 
 import com.hins.socket.tcpudpdemo.constants.UDPConstants;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
