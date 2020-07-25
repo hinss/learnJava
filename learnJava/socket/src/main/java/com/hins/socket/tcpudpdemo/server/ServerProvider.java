@@ -110,7 +110,7 @@ public class ServerProvider {
                         DatagramPacket responsePackage = new DatagramPacket(buffer,
                                 len,
                                 receivePacket.getAddress(),
-                                receivePacket.getPort());
+                                responsePort);
 
                         ds.send(responsePackage);
                         System.out.println("ServerProvider response to:" + clientIp + "\tport:" + responsePort + "\tdataLen:" + len);
