@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-public class ServerProviderTest {
+public class UDPProviderTest {
 
 
     @Test

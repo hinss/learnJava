@@ -9,7 +9,7 @@ import java.net.DatagramSocket;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-public class ServerProvider {
+public class UDPProvider {
 
    private static Provider INSTANCE;
 
@@ -81,7 +81,7 @@ public class ServerProvider {
                     boolean isValid = clientData.length >= UDPConstants.HEADER.length + 2 + 4
                             && ByteUtils.startsWith(clientData, UDPConstants.HEADER);
 
-                    System.out.println("ServerProvider receive form ip:" + clientIp
+                    System.out.println("UDPProvider receive form ip:" + clientIp
                             + "\tport:" + clientPort + "\tdataValid:" + isValid);
 
                     if (!isValid) {
@@ -113,13 +113,13 @@ public class ServerProvider {
                                 responsePort);
 
                         ds.send(responsePackage);
-                        System.out.println("ServerProvider response to:" + clientIp + "\tport:" + responsePort + "\tdataLen:" + len);
+                        System.out.println("UDPProvider response to:" + clientIp + "\tport:" + responsePort + "\tdataLen:" + len);
                     }else{
-                        System.out.println("ServerProvider receive cmd not support; cmd:" + cmd + "\tport:" + port);
+                        System.out.println("UDPProvider receive cmd not support; cmd:" + cmd + "\tport:" + port);
                     }
                 }
 
-                System.out.println("ServerProvider has already closed!");
+                System.out.println("UDPProvider has already closed!");
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
