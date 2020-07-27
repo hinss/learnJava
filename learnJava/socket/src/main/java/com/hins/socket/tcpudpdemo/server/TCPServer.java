@@ -18,7 +18,8 @@ public class TCPServer {
     }
 
     /**
-     * 服务器 启动TCP Server会
+     * 服务器 启动TCPServer
+     * 开启一条线程负责监听客户端连接
      */
     public boolean start(){
 

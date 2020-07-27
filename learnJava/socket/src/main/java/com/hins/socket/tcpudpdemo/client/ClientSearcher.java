@@ -167,7 +167,7 @@ public class ClientSearcher {
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("UDPSercher close...");
             } finally {
                 close();
             }

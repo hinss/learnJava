@@ -17,7 +17,7 @@ public class Server {
         try {
             System.in.read();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("TCPServer 关闭");
         }
 
         UDPProvider.stop();
