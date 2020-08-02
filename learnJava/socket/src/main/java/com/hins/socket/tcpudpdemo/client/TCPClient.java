@@ -1,11 +1,14 @@
 package com.hins.socket.tcpudpdemo.client;
 
 import com.hins.socket.tcpudpdemo.client.model.ServerInfo;
+import com.hins.socket.tcpudpdemo.server.handler.ClientHandler;
+import com.hins.socket.tcpudpdemo.utils.CloseUtils;
 
 import java.io.*;
 import java.net.Inet4Address;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class TCPClient {
 
@@ -25,8 +28,14 @@ public class TCPClient {
 
 
         try {
+            ReadHandler readHandler = new ReadHandler(socket.getInputStream());
+            readHandler.start();
+
             //发送接收数据
             sendData(socket);
+
+            // 退出操作
+            readHandler.exit();
         } catch (Exception e) {
             System.out.println("异常关闭");
         }
@@ -47,29 +56,72 @@ public class TCPClient {
         OutputStream outputStream = socket.getOutputStream();
         PrintStream output = new PrintStream(outputStream);
 
-        InputStream responseInputStream = socket.getInputStream();
-        BufferedReader responseReader = new BufferedReader(new InputStreamReader(responseInputStream));
-
-        boolean flag = true;
         do {
             //阻塞方法  读取键盘一行
             String str = input.readLine();
-
-            //发送到tcp server
             output.println(str);
 
-            //获得回送
-            String retrunMessage = responseReader.readLine();
-            if("bye".equalsIgnoreCase(retrunMessage)){
-                flag = false;
-            }else{
-                System.out.println(retrunMessage);
+            if("00bye00".equalsIgnoreCase(str)){
+                break;
             }
 
-        }while(flag);
+        }while(true);
 
         //资源释放
-        input.close();
         output.close();
     }
+
+
+    public static class ReadHandler extends Thread{
+
+        private boolean done = false;
+        private final InputStream inputStream;
+
+        ReadHandler(InputStream inputStream) {
+            this.inputStream = inputStream;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                // BufferedReader 用于读取客户端的数据
+                BufferedReader socketInput = new BufferedReader(new InputStreamReader(this.inputStream));
+
+                do {
+                    // 客户端拿到一条数据(阻塞方法)
+                    String str;
+                    try {
+                        str = socketInput.readLine();
+                        if(str == null){
+                            System.out.println("连接已关闭,无法读取数据");
+                            break;
+                        }
+                    } catch (SocketTimeoutException e) {
+                        //可能会出现读取服务端的消息超时异常，
+                        //如果异常则继续等待
+                        continue;
+                    }
+
+                    //输出消息
+                    System.out.println(str);
+
+                } while (!done);
+            } catch (IOException e) {
+                if(!done) {
+                    System.out.println("连接异常断开" + e.getMessage());
+                }
+            } finally {
+                CloseUtils.close(inputStream);
+            }
+
+        }
+
+        void exit(){
+            done = true;
+            CloseUtils.close(inputStream);
+        }
+
+    }
+
 }
