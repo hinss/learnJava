@@ -1,4 +1,4 @@
-package com.hins.designmode.compositemode.model;
+package com.hins.designmode.compositemode.constants;
 
 public enum RuleLimitTypeEnum {
     EQUAL(1,"="),

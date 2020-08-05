@@ -1,7 +1,10 @@
 package com.hins.designmode.compositemode.model;
 
+import com.hins.designmode.compositemode.constants.TreeNodeTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
  **/
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TreeNode {
 
     private Long treeId;
@@ -21,7 +26,7 @@ public class TreeNode {
     /**
      * 1-叶子节点   2-果实节点
      */
-    private Integer nodeType;
+    private TreeNodeTypeEnum nodeType;
 
     /**
      * 具体果实节点的东西,可以是任何的对象

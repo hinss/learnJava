@@ -14,6 +14,6 @@ public class UserAgeFilter extends BaseLogicFilter {
 
     @Override
     public String matterValue(Long treeId, String userId, Map<String, String> decisionMatter) {
-        return "age";
+        return decisionMatter.get("age");
     }
 }

@@ -14,6 +14,6 @@ public class UserSexFilter extends BaseLogicFilter {
 
     @Override
     public String matterValue(Long treeId, String userId, Map<String, String> decisionMatter) {
-        return "sex";
+        return decisionMatter.get("sex");
     }
 }

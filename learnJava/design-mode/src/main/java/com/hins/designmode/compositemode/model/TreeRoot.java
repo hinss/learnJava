@@ -1,7 +1,9 @@
 package com.hins.designmode.compositemode.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author: hins
@@ -10,6 +12,8 @@ import lombok.Data;
  **/
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TreeRoot {
 
     private Long treeId;
