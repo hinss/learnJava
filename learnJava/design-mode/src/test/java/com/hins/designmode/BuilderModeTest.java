@@ -2,7 +2,7 @@ package com.hins.designmode;
 
 import com.hins.designmode.buildermode.CarBuilder;
 import com.hins.designmode.buildermode.ICarMenu;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class BuilderModeTest {
 

@@ -4,7 +4,7 @@ import com.hins.designmode.abstractfactory.adapter.IOrientAdapter;
 import com.hins.designmode.abstractfactory.factory.JDKProxy;
 import com.hins.designmode.abstractfactory.service.CommonBreakdownService;
 import com.hins.designmode.abstractfactory.service.impl.CommonBreakdownServiceImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class JDKProxyTest {
 

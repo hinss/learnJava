@@ -4,9 +4,7 @@ import com.hins.designmode.abstractfactory.factory.AbstractFactory;
 import com.hins.designmode.abstractfactory.factory.FactoryProvider;
 import com.hins.designmode.abstractfactory.service.CommonBreakdownService;
 import com.hins.designmode.abstractfactory.service.impl.CommonBreakdownServiceImpl;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Test;
 
 class DesignModeApplicationTests {
 
