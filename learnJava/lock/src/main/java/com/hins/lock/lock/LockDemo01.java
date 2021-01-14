@@ -1,4 +1,4 @@
-package com.hins.lock;
+package com.hins.lock.lock;
 
 import java.util.HashMap;
 import java.util.Map;
